@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Song Detail</title>
+</head>
+<body>
+    <h1>Song Detail</h1>
+    <div th:if="${song != null}">
+        <p>ID: <span th:text="${song.id}"></span></p>
+        <p>Title: <span th:text="${song.title}"></span></p>
+    </div>
+    <div th:if="${song == null}">
+        <p>Movie not found</p>
+    </div>
+
+    <a th:href="@{/songs}">Back to Songs</a>
+</body>
+</html>

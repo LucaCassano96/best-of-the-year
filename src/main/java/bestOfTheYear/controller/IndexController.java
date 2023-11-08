@@ -31,7 +31,7 @@ public class IndexController {
         return "home-page"; // Fa riferimento al templates
     }
 
-
+    //Movies
     @GetMapping("/movies")
     public String getMovies(Model model) {
         List<Movies> movies = getBestMovies();
@@ -39,7 +39,14 @@ public class IndexController {
         return "movies";
     }
 
+    @GetMapping("/movies/{id}")
+    public String getMovieDetail(@PathVariable String id, Model model) {
+        Movies movie = findMovieById(id);
+        model.addAttribute("movie", movie);
+        return "movie-detail";
+    }
 
+    //Songs
     @GetMapping("/songs")
     public String getSongs(Model model) {
         List<Songs> songs = getBestSongs();
@@ -47,12 +54,12 @@ public class IndexController {
         return "songs";
     }
 
-
-    @GetMapping("/{id}")
-    public String getMovieDetail(@PathVariable String id){
-        return "movie-detail";
+    @GetMapping("/songs/{id}")
+    public String getSongDetail(@PathVariable String id, Model model) {
+        Songs song = findSongById(id);
+        model.addAttribute("song", song);
+        return "song-detail";
     }
-
 
 
     private List<Movies> getBestMovies() {
@@ -63,6 +70,26 @@ public class IndexController {
     private List<Songs> getBestSongs() {
         Songs[] songsArray = {new Songs( "1", "Bohemian Rhapsody" ), new Songs( "2", "Hallelujah " ), new Songs( "3", "Imagine" )};
         return Arrays.asList( songsArray );
+    }
+
+    private Movies findMovieById(String id) {
+        List<Movies> movies = getBestMovies();
+        for (Movies movie : movies) {
+            if (movie.getId().equals(id)) {
+                return movie;
+            }
+        }
+        return null;
+    }
+
+    private Songs findSongById(String id) {
+        List<Songs> songs = getBestSongs();
+        for (Songs song : songs) {
+            if (song.getId().equals(id)) {
+                return song;
+            }
+        }
+        return null;
     }
 
 }
