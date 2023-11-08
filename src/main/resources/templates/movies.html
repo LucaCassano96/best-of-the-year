@@ -9,7 +9,14 @@
 </head>
 <body>
 
-<h1 th:text="${mediaTitles}"></h1>
+    <h1>Movies</h1>
+    <ul th:if="${movies.size() > 0}">
+        <li th:each="movie : ${movies}">
+            <a href="#" th:text="${movie.title}"></a>
+        </li>
+    </ul>
+
+    <div th:if="${movies.size() == 0}">The list is empty</div>
 
 </body>
 </html>
